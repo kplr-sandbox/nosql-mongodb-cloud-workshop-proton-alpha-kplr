@@ -1,4 +1,4 @@
-use("sample_supplies")
+/*use("sample_supplies")
 
 //afficher toutes les ventes par magasin à Londres New York et San Diego, par achat avec ou sans coupons 
 //en triant par nombre de magasin du plus grand au plus petit
@@ -25,4 +25,35 @@ db.sales.aggregate([
 
 ])
 
+*/
 
+
+//les airbnb ou on a des frais de nettoyage de plus de 400 € regroupés 
+//par pays classés du pays ou il y en a plus plus à celui ou il y en a le moins
+
+use("sample_airbnb")
+
+
+//db.listingsAndReviews.find({cleaning_fee: {$gte:200}})
+
+db.listingsAndReviews.aggregate(
+    {
+        $match: {
+            cleaning_fee: {$gte:400}
+        }
+    },
+    {
+        $group: {
+            _id: {
+                "country": "$address.country"
+            },
+            nb_airbnb: {$count: {}}
+        }
+    }
+    ,
+    {
+        $sort: {
+            "nb_airbnb":-1
+        }
+    }
+)

@@ -56,9 +56,16 @@ db.sales.find({$or: [{"items.name":"pens"},{"items.tags":"writing"}]})
 
 
 
-use("sample_analytics");
+
+
+
+//use("sample_analytics");
 //db.accounts.find({ "products": "Brokerage"});
 
 //db.transactions.find({transactions: {$elemMatch: {amount:{$lte:4500}, transaction_code:"sell"}}})
 
-db.transactions.find({"transactions.amount": {$lte:4500}, "transactions.transaction_code":"sell"})
+//db.transactions.find({"transactions.amount": {$lte:4500}, "transactions.transaction_code":"sell"})
+
+
+
+
