@@ -1,0 +1,64 @@
+//use("sample_supplies");
+/*
+1
+db.accounts.insertOne({account_id: 111333, limit: 12000, products: [ "Commodity", "Brokerage" ],"last_updated": new Date()})
+
+2.
+db.accounts.insertMany([{  account_id: 111333,  limit: 12000,  products: [  "Commodity",  "Brokerage"  ],  "last_updated": new Date()},{  account_id: 678943,  limit: 8000,  products: [  "CurrencyService",  "Brokerage",  "InvestmentStock"  ],  last_updated: new Date()},{  account_id: 321654,  limit: 10000,  products: [  "Commodity",  "CurrencyService"  ],  last_updated: new Date()},])
+
+3.
+db.sales.find({_id: ObjectId("5bd761dcae323e45a93ccff4")})
+
+db.sales.find({storeLocation: {$in: ["London", "New York"]}})
+
+4.
+db.sales.find({ "items.price": {$gt:200}})
+
+
+5.
+db.accounts.find({products:"CurrencyService"})
+
+
+db.transactions.find({transactions: {$elemMatch: {amount:{$lte:4500}, transaction_code:"sell"}}})
+
+
+db.sales.find({purchaseMethod:"Online" , couponUsed:true, "customer.age":{$lte:25}})
+
+
+//AND implicite :
+db.sales.find({items:{$elemMatch: {name:"pens", tags: "writing"}}})
+
+//OR explicite : 
+db.sales.find({items:{$elemMatch: {$or: [{name:"pens"}, {tags: "writing"}]}}})
+db.sales.find({$or: [{"items.name":"pens"},{"items.tags":"writing"}]})
+
+*/
+
+
+
+
+
+//db.sales.find({"items.price":{ $gt: 200}});
+
+//db.sales.count();
+
+//db.sales.findOne();
+
+//db.sales.find({storeLocation: {$in: ["London", "New York"]}}).count()
+
+
+//db.sales.findOne({"customer.gender":"M"})
+
+//db.sales.find("items.price : {}")
+
+
+//db.sales.findOne();
+
+
+
+use("sample_analytics");
+//db.accounts.find({ "products": "Brokerage"});
+
+//db.transactions.find({transactions: {$elemMatch: {amount:{$lte:4500}, transaction_code:"sell"}}})
+
+db.transactions.find({"transactions.amount": {$lte:4500}, "transactions.transaction_code":"sell"})

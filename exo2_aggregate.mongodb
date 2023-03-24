@@ -1,0 +1,28 @@
+use("sample_supplies")
+
+//afficher toutes les ventes par magasin à Londres New York et San Diego, par achat avec ou sans coupons 
+//en triant par nombre de magasin du plus grand au plus petit
+db.sales.aggregate([
+{
+    $match: {
+        storeLocation: {$in: ["London", "New York", "San Diego"]}
+    }
+},
+{
+    $group: {
+        _id: {
+            "storeLocation" : "$storeLocation",
+            "couponUsed" : "$couponUsed"
+        },
+        nbMagasin:  { $count : {}}
+    }
+},
+{
+    $sort: {
+        "nbMagasin":-1
+    }
+}
+
+])
+
+
